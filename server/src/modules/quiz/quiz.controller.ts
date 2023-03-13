@@ -26,6 +26,7 @@ export class QuizController {
 
   @Post('/create')
   @HttpCode(200)
+  @UsePipes(ValidationPipe)
   async createQuiz(@Res() response, @Body() quiz: quiz) {
     const newquiz = await this.quizService.create(quiz);
     return response.status(HttpStatus.CREATED).json({

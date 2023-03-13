@@ -6,4 +6,6 @@ export declare class QuizService {
     create(quiz: quiz): Promise<quiz>;
     getAllQuiz(): Promise<quiz[]>;
     readbyId(id: any): Promise<quiz>;
+    updatebyId(id: any): Promise<quiz>;
+    delete(id: any): Promise<quiz>;
 }

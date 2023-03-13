@@ -35,6 +35,12 @@ let QuizService = class QuizService {
     async readbyId(id) {
         return await this.QuizModel.findById(id);
     }
+    async updatebyId(id) {
+        return await this.QuizModel.findByIdAndUpdate(id, quiz_schema_1.quiz, { new: true });
+    }
+    async delete(id) {
+        return await this.QuizModel.findByIdAndDelete(id);
+    }
 };
 QuizService = __decorate([
     (0, common_1.Injectable)(),

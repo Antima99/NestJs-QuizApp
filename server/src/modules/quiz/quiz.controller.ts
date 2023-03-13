@@ -1,11 +1,13 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
   Param,
   Post,
+  Put,
   Res,
   UsePipes,
   ValidationPipe,
@@ -36,6 +38,21 @@ export class QuizController {
     const quiz = await this.quizService.readbyId(id);
     return response.status(HttpStatus.OK).json({
       quiz,
+    });
+  }
+  @Put('/:id')
+  async updatebyId(@Res() response, @Param('id') id) {
+    const updatedquiz = await this.quizService.updatebyId(id);
+    return response.status(HttpStatus.OK).json({
+      updatedquiz,
+    });
+  }
+
+  @Delete('/:id')
+  async delete(@Res() respnse, @Param('id') id) {
+    const deletedQuiz = await this.quizService.delete(id);
+    return respnse.status(HttpStatus.OK).json({
+      deletedQuiz,
     });
   }
 

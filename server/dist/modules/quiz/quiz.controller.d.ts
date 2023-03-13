@@ -6,4 +6,6 @@ export declare class QuizController {
     getAllQuiz(): Promise<quiz[]>;
     createQuiz(response: any, quiz: quiz): Promise<any>;
     readbyId(response: any, id: any): Promise<any>;
+    updatebyId(response: any, id: any): Promise<any>;
+    delete(respnse: any, id: any): Promise<any>;
 }

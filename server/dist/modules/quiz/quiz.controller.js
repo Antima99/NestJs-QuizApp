@@ -35,6 +35,18 @@ let QuizController = class QuizController {
             quiz,
         });
     }
+    async updatebyId(response, id) {
+        const updatedquiz = await this.quizService.updatebyId(id);
+        return response.status(common_1.HttpStatus.OK).json({
+            updatedquiz,
+        });
+    }
+    async delete(respnse, id) {
+        const deletedQuiz = await this.quizService.delete(id);
+        return respnse.status(common_1.HttpStatus.OK).json({
+            deletedQuiz,
+        });
+    }
 };
 __decorate([
     (0, common_1.Get)('/'),
@@ -59,6 +71,22 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], QuizController.prototype, "readbyId", null);
+__decorate([
+    (0, common_1.Put)('/:id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "updatebyId", null);
+__decorate([
+    (0, common_1.Delete)('/:id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "delete", null);
 QuizController = __decorate([
     (0, common_1.Controller)('quiz'),
     __metadata("design:paramtypes", [quiz_service_1.QuizService])

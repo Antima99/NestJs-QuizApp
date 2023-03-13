@@ -24,6 +24,14 @@ export class QuizService {
     return await this.QuizModel.findById(id);
   }
 
+  async updatebyId(id: any): Promise<quiz> {
+    return await this.QuizModel.findByIdAndUpdate(id, quiz, { new: true });
+  }
+
+  async delete(id: any): Promise<quiz> {
+    return await this.QuizModel.findByIdAndDelete(id);
+  }
+
   // async createQuiz(): Promise<QuizDocument> {
   //   const quiz = new this.QuizModel();
   //   return quiz.save();

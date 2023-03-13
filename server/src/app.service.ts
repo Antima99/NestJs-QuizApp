@@ -7,6 +7,6 @@ export class AppService {
   }
 
   getSomething(): string {
-    return 'watch what !';
+    return 'watch what is there in something !';
   }
 }

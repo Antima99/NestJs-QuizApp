@@ -13,7 +13,7 @@ let AppService = class AppService {
         return 'Hello World!';
     }
     getSomething() {
-        return 'watch what !';
+        return 'watch what is there in something !';
     }
 };
 AppService = __decorate([

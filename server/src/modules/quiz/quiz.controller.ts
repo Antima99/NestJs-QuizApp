@@ -21,7 +21,7 @@ export class QuizController {
   @Post('/create')
   @HttpCode(200)
   @UsePipes(ValidationPipe)
-  dcreateQuiz(@Body() quizdata: CreateQuizDto) {
+  createQuiz(@Body() quizdata: CreateQuizDto) {
     return { data: quizdata };
   }
 }

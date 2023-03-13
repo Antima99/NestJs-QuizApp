@@ -15,17 +15,19 @@ const quiz_module_1 = require("./modules/quiz/quiz.module");
 const quiz_controller_1 = require("./modules/quiz/quiz.controller");
 const quiz_service_1 = require("./modules/quiz/quiz.service");
 const mongoose_1 = require("@nestjs/mongoose");
+const quiz_schema_1 = require("./schema/quiz.schema");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            quiz_module_1.QuizModule,
             config_1.ConfigModule.forRoot({
                 envFilePath: '.env',
                 isGlobal: true,
             }),
-            mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URL),
+            mongoose_1.MongooseModule.forRoot(process.env.MONGODB_URL, { dbName: 'quizData' }),
+            mongoose_1.MongooseModule.forFeature([{ name: quiz_schema_1.quiz.name, schema: quiz_schema_1.quizSchema }]),
+            quiz_module_1.QuizModule,
         ],
         controllers: [app_controller_1.AppController, quiz_controller_1.QuizController],
         providers: [app_service_1.AppService, quiz_service_1.QuizService],

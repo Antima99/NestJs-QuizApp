@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizController = void 0;
 const common_1 = require("@nestjs/common");
-const create_quiz_dto_1 = require("./dto/create.quiz.dto");
+const quiz_schema_1 = require("../../schema/quiz.schema");
 const quiz_service_1 = require("./quiz.service");
 let QuizController = class QuizController {
     constructor(quizService) {
@@ -23,8 +23,17 @@ let QuizController = class QuizController {
     getAllQuiz() {
         return this.quizService.getAllQuiz();
     }
-    createQuiz(quizdata) {
-        return { data: quizdata };
+    async createQuiz(response, quiz) {
+        const newquiz = await this.quizService.create(quiz);
+        return response.status(common_1.HttpStatus.CREATED).json({
+            newquiz,
+        });
+    }
+    async readbyId(response, id) {
+        const quiz = await this.quizService.readbyId(id);
+        return response.status(common_1.HttpStatus.OK).json({
+            quiz,
+        });
     }
 };
 __decorate([
@@ -36,12 +45,20 @@ __decorate([
 __decorate([
     (0, common_1.Post)('/create'),
     (0, common_1.HttpCode)(200),
-    (0, common_1.UsePipes)(common_1.ValidationPipe),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_quiz_dto_1.CreateQuizDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, quiz_schema_1.quiz]),
+    __metadata("design:returntype", Promise)
 ], QuizController.prototype, "createQuiz", null);
+__decorate([
+    (0, common_1.Get)('/:id'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], QuizController.prototype, "readbyId", null);
 QuizController = __decorate([
     (0, common_1.Controller)('quiz'),
     __metadata("design:paramtypes", [quiz_service_1.QuizService])

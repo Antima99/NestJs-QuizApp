@@ -8,6 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizModule = void 0;
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const quiz_schema_1 = require("../../schema/quiz.schema");
 const quiz_controller_1 = require("./quiz.controller");
 const quiz_service_1 = require("./quiz.service");
 let QuizModule = class QuizModule {
@@ -15,7 +17,13 @@ let QuizModule = class QuizModule {
 QuizModule = __decorate([
     (0, common_1.Module)({
         controllers: [quiz_controller_1.QuizController],
-        providers: [quiz_service_1.QuizService],
+        providers: [
+            quiz_service_1.QuizService,
+            {
+                provide: (0, mongoose_1.getModelToken)(quiz_schema_1.quiz.name),
+                useValue: quiz_schema_1.quiz,
+            },
+        ],
     })
 ], QuizModule);
 exports.QuizModule = QuizModule;
